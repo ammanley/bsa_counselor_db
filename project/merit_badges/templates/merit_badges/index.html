@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Merit Badges</h2>
+<button><a href = '{{url_for('counselors.index')}}''>Home</a></button>
+<ul style=col-md-4>
+{%  for badge in badges  %}
+
+<li>
+	{{badge.name}} --- Eagle Required? {{badge.eagle_required}}	
+	<p>Counselors 
+		{% for counselor in badge.counselors %}
+			
+				- <a href = "{{url_for('counselors.show', id=counselor.id)}}">{{counselor.username}}</a>
+			
+		{%  endfor  %}
+	</p>
+</li>
+
+{%  endfor  %}
+</ul>
+{% endblock %}

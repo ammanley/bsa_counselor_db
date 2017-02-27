@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Hello, Counselor {{counselor.username}}</h2>
+<button><a href = '{{url_for('counselors.index')}}''>Home</a></button>
+
+<button><a href = '{{url_for('counselors.edit', id=counselor.id)}}''>Edit Profile</a></button>
+
+<p>
+	Username: {{counselor.username}}
+</p>
+<p>
+	First Name: {{counselor.first_name}}
+</p>
+<p>
+	Last Name: {{counselor.last_name}}
+</p>
+<p>
+	Phone Number: {{counselor.phone}}
+</p>
+<p>
+	Address: {{counselor.address}}
+</p>
+<p>
+	Badges Counseled: 
+	{%  for badge in counselor.badges  %}
+		<li>{{badge.name}}</li>
+	{%  endfor  %}
+</p>
+
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Welcome to Merit Badge Tracker!</h1>
+<h2>All Current Merit Badge Counselors</h2>
+<button><a href = '{{url_for('counselors.index')}}''>Home</a></button>
+<button><a href = "{{url_for('merit_badges.index')}}">Merit Badges</a></button>
+<button><a href = "{{url_for('counselors.new')}}">Add A New Counselor</a></button>
+<!-- <button><a href = "#">Add A New Scout</a></button> -->
+{%  for counsel in counselors  %}
+<ul>
+<li>
+	Username: {{counsel.username}},
+	Email: {{counsel.email}},
+	Badges: 
+	{%  for badge in counsel.badges  %}
+		- {{badge.name}}
+	{%  endfor  %}
+	<button><a href = '{{url_for('counselors.show', id=counsel.id)}}''>Profile</a></button>
+</li>
+</ul>
+{%  endfor  %}
+{% endblock %}

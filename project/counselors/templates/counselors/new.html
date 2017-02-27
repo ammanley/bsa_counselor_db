@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>New User</h2>
+<button><a href = '{{url_for('counselors.index')}}''>Home</a></button>
+
+<ul>
+<span>
+{%  if form.errors  %}
+	{{error}}
+	{%  endif  %}
+</span>
+
+<form method = 'POST', action = {{url_for('counselors.new')}}>
+{{form.hidden_tag()}}
+<ul>
+{%  for field in form if field.widget.input_type != 'hidden' %}
+	<li>
+		{{field.label}}: {{field}}
+		<span>
+		{%  if form.errors  %}
+			{%  for error in form.errors  %}
+				{{error}}
+			{%  endfor  %}
+		{%  endif  %}
+		</span>
+	</li>
+{%  endfor  %}
+</ul>
+<button type='submit'>Submit</button>
+</form>
+
+
+{% endblock %}
