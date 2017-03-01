@@ -5,15 +5,17 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_modus import Modus
 from flask_bcrypt import Bcrypt
 from flask_wtf.csrf import CsrfProtect
+import os
 # for migrations to work
 
-
+print("SECRET_KEY", os.environ.get('SECRET_KEY'))
+secret = os.urandom(24)
+print(secret)
 app = Flask(__name__)
-bcrypt = Bcrypt(app)
+bcrypt = Bcrypt(app)	
 login_manager = LoginManager(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/merit_badge_counselors'
-app.config['SECRET_KEY'] = 'shhhhhh'
-# set this to enviro later
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY') or secret
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 modus = Modus(app)
