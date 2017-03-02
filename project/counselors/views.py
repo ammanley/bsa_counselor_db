@@ -97,7 +97,6 @@ def edit(id):
 
 
 @counselors_blueprint.route('/signup', methods=['GET','POST'])
-@login_required
 def new():
 	form = CounselorForm(request.form)
 	if request.method == 'POST':
