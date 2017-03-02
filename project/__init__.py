@@ -44,7 +44,7 @@ def load_user(id):
 
 @app.route('/')
 def root():
-	return "Hi there! Welcome to Root!"
+	return redirect(url_for('counselors.signup'))
 
 
 app.register_blueprint(counselors_blueprint, url_prefix = '/counselors')
