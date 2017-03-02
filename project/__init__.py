@@ -15,7 +15,14 @@ print(secret)
 app = Flask(__name__)
 bcrypt = Bcrypt(app)	
 login_manager = LoginManager(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/merit_badge_counselors'
+if os.environ.get('ENV') == 'production':
+    debug = False
+    # Heroku gives us an environment variable called DATABASE_URL when we add a postgres database
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+else:
+    debug = True
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/merit_badge_counselors'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/merit_badge_counselors'
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY') or secret
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
 app.config['TEMPLATES_AUTO_RELOAD'] = True
