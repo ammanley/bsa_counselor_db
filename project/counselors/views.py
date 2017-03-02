@@ -18,7 +18,7 @@ def login():
 		counselor = Counselor.query.filter_by(username=form.username.data).first()
 		if counselor:
 			if form.validate():
-				if form.password.data == counselor.password:
+				if bcrypt.check_password_hash(counselor.password, form.password.data):
 					flash('You have been logged in.')
 					login_user(counselor)
 					return redirect(url_for('counselors.index',counselor=counselor))
@@ -100,12 +100,12 @@ def edit(id):
 def new():
 	form = CounselorForm(request.form)
 	if request.method == 'POST':
-		from IPython import embed; embed()
+
 		if form.validate():
 			new_counselor = Counselor.new_for_form(form)
 			db.session.add(new_counselor)
 			db.session.commit()
-			flash("Thank you for singing up. You can now add your address and other personal info through the edit page.")
-			return redirect(url_for('counselors.index'))
+			flash("Thank you for singing up. You can now add your address and other personal info through the edit page after you log in.")
+			return redirect(url_for('counselors.login'))
 		flash('Please fill in all fields.')
 	return render_template('counselors/new.html', form=form)

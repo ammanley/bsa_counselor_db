@@ -9,8 +9,9 @@
 
 <!-- <button><a href = "#">Add A New Scout</a></button> -->
 
-<button><a href = '{{url_for('counselors.show', id=counselor.id)}}''>Profile</a></button>
+
 <button><a href = "#">Messages</a></button>
+<button><a href = "{{url_for('counselors.show', id=counselor.id)}}">Profile/Edit</a></button>
 <button><a href = "{{url_for('counselors.logout')}}">Log Out</a></button>
 
 <h2>Merit Badges You Currently Counsel</h2>
