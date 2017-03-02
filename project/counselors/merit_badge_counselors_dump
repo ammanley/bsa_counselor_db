@@ -1,0 +1,297 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.6.1
+-- Dumped by pg_dump version 9.6.1
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: alembic_version; Type: TABLE; Schema: public; Owner: AaronManley
+--
+
+CREATE TABLE alembic_version (
+    version_num character varying(32) NOT NULL
+);
+
+
+ALTER TABLE alembic_version OWNER TO "AaronManley";
+
+--
+-- Name: counselors; Type: TABLE; Schema: public; Owner: AaronManley
+--
+
+CREATE TABLE counselors (
+    id integer NOT NULL,
+    username text,
+    password text,
+    first_name text,
+    last_name text,
+    email text,
+    phone integer,
+    address text
+);
+
+
+ALTER TABLE counselors OWNER TO "AaronManley";
+
+--
+-- Name: counselors_id_seq; Type: SEQUENCE; Schema: public; Owner: AaronManley
+--
+
+CREATE SEQUENCE counselors_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE counselors_id_seq OWNER TO "AaronManley";
+
+--
+-- Name: counselors_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: AaronManley
+--
+
+ALTER SEQUENCE counselors_id_seq OWNED BY counselors.id;
+
+
+--
+-- Name: counselors_merit_badges; Type: TABLE; Schema: public; Owner: AaronManley
+--
+
+CREATE TABLE counselors_merit_badges (
+    counselor_id integer,
+    merit_badge_id integer
+);
+
+
+ALTER TABLE counselors_merit_badges OWNER TO "AaronManley";
+
+--
+-- Name: merit_badges; Type: TABLE; Schema: public; Owner: AaronManley
+--
+
+CREATE TABLE merit_badges (
+    id integer NOT NULL,
+    name text,
+    eagle_required boolean
+);
+
+
+ALTER TABLE merit_badges OWNER TO "AaronManley";
+
+--
+-- Name: merit_badges_id_seq; Type: SEQUENCE; Schema: public; Owner: AaronManley
+--
+
+CREATE SEQUENCE merit_badges_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE merit_badges_id_seq OWNER TO "AaronManley";
+
+--
+-- Name: merit_badges_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: AaronManley
+--
+
+ALTER SEQUENCE merit_badges_id_seq OWNED BY merit_badges.id;
+
+
+--
+-- Name: counselors id; Type: DEFAULT; Schema: public; Owner: AaronManley
+--
+
+ALTER TABLE ONLY counselors ALTER COLUMN id SET DEFAULT nextval('counselors_id_seq'::regclass);
+
+
+--
+-- Name: merit_badges id; Type: DEFAULT; Schema: public; Owner: AaronManley
+--
+
+ALTER TABLE ONLY merit_badges ALTER COLUMN id SET DEFAULT nextval('merit_badges_id_seq'::regclass);
+
+
+--
+-- Data for Name: alembic_version; Type: TABLE DATA; Schema: public; Owner: AaronManley
+--
+
+COPY alembic_version (version_num) FROM stdin;
+e47f145de306
+\.
+
+
+--
+-- Data for Name: counselors; Type: TABLE DATA; Schema: public; Owner: AaronManley
+--
+
+COPY counselors (id, username, password, first_name, last_name, email, phone, address) FROM stdin;
+4	Vader	$2b$12$tCOc/.Bp1z5eXiuqDmpHgOLTaDlNLMNJCYAAP2c4PhSkYseRqt/E.	\N	\N	sdfds@gmail.com	\N	\N
+5	Picard	$2b$12$v35tDojH0Kc3oQveaAj4jub5QVeet.0ZBRLm5cr3e5vZ3NYimXj9G	\N	\N	picard@enterprise.com	\N	\N
+6	Joel	$2b$12$caidtTcgt/iQ5NKU0nqjsOlJ0N0nUHofA2I04p9B3vmftE6SmU8/e	\N	\N	joel@rithmschool.com	\N	\N
+1	ammanley	Athlon1!	Aaron	Manley	aaron.m.manley@gmail.com	8	156 Fontainbleu Ct, Apt/Suite
+2	mikemanley	mike	Mike	Manley	mike.manley@juno.com	408946767	156 FONTAINBLEU
+3	MysteryMan	$2b$12$aJQEv9Pu.xPj/mB.BaLw2u5oA4YyE66NmH..en/MWHzxSU6vgAuqe			iluvscouts@bsa.org	1234567890	
+8	Ellie	$2b$12$nempNObyfJmvKEG1.Lo9e.GOSHo/y4eyLOXIJvaSX5z/zzKTsMn5u	Ellie	Schoppik	ellie@rithmschool.com	1234567843	Rithm School
+9	AwesomGuy	$2b$12$6zvp/6Xrpn7rOVlbtelNlePA4wuA2DTbNB7mBptn0vvqDLcKuM1Ue	\N	\N	blah@rithmschool.com	\N	\N
+10	NewGuy	$2b$12$qrSuU8SH8LVPSkTfsnzNhOHknk8f6eTlLrGD2jm2inLhbQfjgWHAO	\N	\N	new@gmail.com	\N	\N
+11	Tim	$2b$12$MeYJUK0LzbJowtUXV3t5yuA.3rUgk5sBJfJ4QRpL7zxbXiwfR3/pm	\N	\N	tim@rithmschool.com	\N	\N
+\.
+
+
+--
+-- Name: counselors_id_seq; Type: SEQUENCE SET; Schema: public; Owner: AaronManley
+--
+
+SELECT pg_catalog.setval('counselors_id_seq', 11, true);
+
+
+--
+-- Data for Name: counselors_merit_badges; Type: TABLE DATA; Schema: public; Owner: AaronManley
+--
+
+COPY counselors_merit_badges (counselor_id, merit_badge_id) FROM stdin;
+1	1
+1	2
+1	5
+1	7
+1	8
+8	6
+8	10
+8	19
+8	20
+8	1
+8	2
+\.
+
+
+--
+-- Data for Name: merit_badges; Type: TABLE DATA; Schema: public; Owner: AaronManley
+--
+
+COPY merit_badges (id, name, eagle_required) FROM stdin;
+1	Personal Fitness	t
+2	Personal Management	t
+3	Swimming	t
+4	First Aid	t
+5	Small Boat Sailing	f
+6	Underwater Basket Weaving	f
+7	Shotgun Shooting	f
+8	Rifle Shooting	f
+9	Orienteering	t
+10	Wilderness Survival	t
+11	Environmental Science	t
+12	Horsemanship	f
+13	Canoeing 	f
+14	Citizenship in the Community	t
+15	Citizenship in the Nation	t
+16	Citizenship in the World	t
+17	Emergency Prepardness	t
+18	Electronics	f
+19	Scholarship 	f
+20	Wood Carving 	f
+21	Kayaking	f
+22	Fishing	f
+23	Archery	f
+24	Cinematograrphy	f
+25	Digital Technology	f
+26	White Water Rafting	f
+27	Camping	f
+28	Leatherwork	f
+29	Fishing	f
+30	Climbing	f
+31	Geocaching	f
+32	Robotics	f
+33	Metalwork	f
+34	Music	f
+35	Game Design	f
+36	Rowing	f
+37	Nuclear Science	f
+38	Scuba Diving	f
+39	Hiking	t
+\.
+
+
+--
+-- Name: merit_badges_id_seq; Type: SEQUENCE SET; Schema: public; Owner: AaronManley
+--
+
+SELECT pg_catalog.setval('merit_badges_id_seq', 39, true);
+
+
+--
+-- Name: alembic_version alembic_version_pkc; Type: CONSTRAINT; Schema: public; Owner: AaronManley
+--
+
+ALTER TABLE ONLY alembic_version
+    ADD CONSTRAINT alembic_version_pkc PRIMARY KEY (version_num);
+
+
+--
+-- Name: counselors counselors_pkey; Type: CONSTRAINT; Schema: public; Owner: AaronManley
+--
+
+ALTER TABLE ONLY counselors
+    ADD CONSTRAINT counselors_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: merit_badges merit_badges_pkey; Type: CONSTRAINT; Schema: public; Owner: AaronManley
+--
+
+ALTER TABLE ONLY merit_badges
+    ADD CONSTRAINT merit_badges_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: counselors_merit_badges counselors_merit_badges_counselor_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: AaronManley
+--
+
+ALTER TABLE ONLY counselors_merit_badges
+    ADD CONSTRAINT counselors_merit_badges_counselor_id_fkey FOREIGN KEY (counselor_id) REFERENCES counselors(id);
+
+
+--
+-- Name: counselors_merit_badges counselors_merit_badges_merit_badge_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: AaronManley
+--
+
+ALTER TABLE ONLY counselors_merit_badges
+    ADD CONSTRAINT counselors_merit_badges_merit_badge_id_fkey FOREIGN KEY (merit_badge_id) REFERENCES merit_badges(id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
