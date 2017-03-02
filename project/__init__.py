@@ -6,6 +6,7 @@ from flask_modus import Modus
 from flask_bcrypt import Bcrypt
 from flask_wtf.csrf import CsrfProtect
 import os
+
 # for migrations to work
 
 print("SECRET_KEY", os.environ.get('SECRET_KEY'))
